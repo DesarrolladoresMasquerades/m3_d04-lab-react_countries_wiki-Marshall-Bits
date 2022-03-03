@@ -20,21 +20,24 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <NavBar />
-      <div>
-        <CountriesList countries={countriesList} />
-      </div>
+    countriesList.length ?
+      <div className="App">
+        <NavBar />
+        <div>
+          <CountriesList countries={countriesList} />
+        </div>
 
-      <Routes>
-        {countries.map((country) => (
-          <Route
-            exact
-            path={country.alpha3Code}
-            element={<CountryDetails country={country} />} />
-        ))}
-      </Routes>
-    </div>
+        <Routes>
+          {countries.map((country) => (
+            <Route
+              exact
+              path={country.alpha3Code}
+              element={<CountryDetails country={country} />} />
+          ))}
+        </Routes>
+      </div>
+      :
+      <h2>Loading...</h2>
   );
 }
 
