@@ -1,23 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import CountriesList from './components/CountriesList';
+import NavBar from './components/NavBar';
+import countries from "./countries.json";
+import { Routes, Route } from "react-router-dom";
+import CountryDetails from './components/CountryDetails';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
 
 function App() {
+  const apiUrl = "https://restcountries.com/v2/all"
+
+  const [countriesList, setCountries] = useState([]);
+
+  useEffect(() => {
+    axios.get(apiUrl).then((response) => {
+      setCountries(response.data);
+    });
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar />
+      <div>
+        <CountriesList countries={countriesList} />
+      </div>
+
+      <Routes>
+        {countries.map((country) => (
+          <Route
+            exact
+            path={country.alpha3Code}
+            element={<CountryDetails country={country} />} />
+        ))}
+      </Routes>
     </div>
   );
 }

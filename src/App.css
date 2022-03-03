@@ -3,7 +3,6 @@
 }
 
 .App-logo {
-  height: 40vmin;
   pointer-events: none;
 }
 
@@ -11,6 +10,16 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.country-details{
+  position: absolute;
+  top: 20vh;
+  left: 50vw;
+}
+
+.countries-container{
+  height: 100vh;
 }
 
 .App-header {
